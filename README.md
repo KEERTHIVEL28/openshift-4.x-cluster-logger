@@ -19,7 +19,7 @@ openshift_url  | OpenShift Login URL |  https://master.example.com:6443
 openshift_token  | OpenShift Token used to login to OpenShift | 1234567890
 insecure_skip_tls_verify  | Skip insecure tls verify | true
 template_owner  |  owner of OpenShift tempalte  |  root
-provision_elasticsearch_operator  | Deploy ElasticSearch Operator  |  "elasticsearch-operator"
+provision_elasticsearch_operator  | Deploy ElasticSearch Operator  |  yes
 eo_channel  | Update Channel for the  Elasticsearch Operator Subscription | "4.3"
 eo_installPlanApproval  | Install Plan for Elasticsearch Operator | "Automatic"
 eo_source  | Needed if  installed on a restricted network, also known as a disconnected cluster | "redhat-operators"
