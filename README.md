@@ -68,7 +68,7 @@ Including an example of how to use your role (for instance, with variables passe
   vars:
     openshift_token: 1234567890
     openshift_url: https://master.example.com:6443
-    delete_deployment: true
+    delete_deployment: false
     insecure_skip_tls_verify: true
     provision_elasticsearch_operator: true
     provision_cluster_logging_operator: true

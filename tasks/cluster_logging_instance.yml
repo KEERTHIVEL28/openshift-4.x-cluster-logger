@@ -36,7 +36,9 @@
 - name: Deleting the cluster logging instance
   command: "oc delete -f {{ target_dir }}cluster-logging-template.yaml"
   when: delete_deployment and not enable_es_storage
+  ignore_errors: yes
 
 - name: Deleting the cluster logging  with storage
   command: "oc delete -f {{ target_dir }}cluster-logging-template-storage.yaml"
   when: delete_deployment and  enable_es_storage
+  ignore_errors: yes

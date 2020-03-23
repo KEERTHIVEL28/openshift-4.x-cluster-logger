@@ -46,11 +46,14 @@
 - name: Deleting the Cluster Logging Operator
   command: "oc delete -f {{ target_dir }}clo-og.yaml"
   when: delete_deployment
+  ignore_errors: yes
 
 - name: Deleting the Cluster Logging Subscription object
   command: "oc delete -f {{ target_dir }}clo-sub.yaml"
   when: delete_deployment
+  ignore_errors: yes
 
 - name: Deleting the openshift-logging Namespace
   command: "oc delete -f {{ target_dir }}clo-namespace.yaml"
   when: delete_deployment
+  ignore_errors: yes

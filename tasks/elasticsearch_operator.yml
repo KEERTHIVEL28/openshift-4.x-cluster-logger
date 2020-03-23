@@ -49,15 +49,19 @@
 - name: Install the Elasticsearch Operator
   command: "oc delete -f {{ target_dir }}eo-og.yaml"
   when: delete_deployment
+  ignore_errors: yes
 
 - name: Install the Elasticsearch Operator subscription object
   command: "oc delete -f {{ target_dir }}eo-sub.yaml"
   when: delete_deployment
+  ignore_errors: yes
 
 - name: Create the  Elasticsearch Operator Role-based Access Control (RBAC) object file
   command: "oc delete -f {{ target_dir }}eo-rbac.yaml"
   when: delete_deployment
+  ignore_errors: yes
 
-- name: Delte the openshift-operators-redhat Namespace
+- name: Delete the openshift-operators-redhat Namespace
   command: "oc delete -f {{ target_dir }}eo-namespace.yaml"
   when: delete_deployment
+  ignore_errors: yes
