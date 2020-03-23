@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars_files:
+  - defaults/main.yml
+  vars:
+    openshift_token: R3GtAwVniJpuTSpOuYSgPPevIQgTt7v86XIUZryejjY
+    openshift_url: https://api.ocp4.tosins-tower-demo.com:6443
+    delete_deployment: false
+    insecure_skip_tls_verify: true
+    provision_elasticsearch_operator: false
+    target_dir: "/tmp/"
+  tasks:
+  - include: tasks/main.yml

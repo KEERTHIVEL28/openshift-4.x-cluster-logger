@@ -1,0 +1,15 @@
+---
+- name: Login to OpenShift Cluster
+  include_tasks: openshift_login.yml
+
+- name: Install the Elasticsearch Operator
+  include_tasks: elasticsearch_operator.yml
+  when: provision_elasticsearch_operator
+
+- name: Install the Cluster Logging Operator
+  include_tasks: cluster_logging_operator.yml
+  when: provision_cluster_logging_operator
+
+- name: Creating a Cluster Logging instance
+  include_tasks: cluster_logging_instance.yml
+  when: provision_cluster_logging_instance

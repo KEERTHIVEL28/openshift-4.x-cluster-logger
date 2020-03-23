@@ -1,0 +1,56 @@
+- name: Copying over clo-namespace.yaml
+  template:
+    src: templates/clo-namespace.yaml.j2
+    dest:  "{{ target_dir }}clo-namespace.yaml"
+    owner: "{{ template_owner }}"
+    group: "{{ template_owner }}"
+    mode: 0666
+
+- name: Copying over clo-og.yaml
+  template:
+    src: templates/clo-og.yaml.j2
+    dest:  "{{ target_dir }}clo-og.yaml"
+    owner: "{{ template_owner }}"
+    group: "{{ template_owner }}"
+    mode: 0666
+
+- name: Copying over clo-sub.yaml
+  template:
+    src: templates/clo-sub.yaml.j2
+    dest:  "{{ target_dir }}clo-sub.yaml"
+    owner: "{{ template_owner }}"
+    group: "{{ template_owner }}"
+    mode: 0666
+
+
+- name: Creating the openshift-logging Namespace
+  command: "oc create -f {{ target_dir }}clo-namespace.yaml"
+  when: not delete_deployment
+
+- name: Creating the Cluster Logging Operator
+  command: "oc create -f {{ target_dir }}clo-og.yaml"
+  when: not delete_deployment
+
+- name: Creating the Cluster Logging Subscription object
+  command: "oc create -f {{ target_dir }}clo-sub.yaml"
+  when: not delete_deployment
+
+- name: Waiting for  Cluster Logging Operator to Succeeded
+  shell: |
+    oc get csv --all-namespaces -n openshift-logging | grep "openshift-logging"
+  register: install_status
+  until: "'Succeeded' in install_status.stdout"
+  retries: 60
+  delay: 15
+
+- name: Deleting the Cluster Logging Operator
+  command: "oc delete -f {{ target_dir }}clo-og.yaml"
+  when: delete_deployment
+
+- name: Deleting the Cluster Logging Subscription object
+  command: "oc delete -f {{ target_dir }}clo-sub.yaml"
+  when: delete_deployment
+
+- name: Deleting the openshift-logging Namespace
+  command: "oc delete -f {{ target_dir }}clo-namespace.yaml"
+  when: delete_deployment

@@ -1,0 +1,51 @@
+apiVersion: "logging.openshift.io/v1"
+kind: "ClusterLogging"
+metadata:
+  name: "instance"
+  namespace: "openshift-logging"
+spec:
+  managementState: "{{ management_state }}"
+  logStore:
+    type: "elasticsearch"
+    elasticsearch:
+      nodeCount: {{ es_node_count |  int }}
+      resources:
+        limits:
+          memory: "{{ es_memory_limit }}"
+        requests:
+          cpu: "{{ es_cpu_requests }}"
+          memory: "{{ es_memory_requests }}"
+      storage:
+        storageClassName: "{{ es_storageclassname }}"
+        size: "{{ es_storage_size }}"
+      redundancyPolicy: "{{ replication_policy }}"
+  visualization:
+    type: "kibana"
+    kibana:
+      resources:
+        limits:
+          memory: {{ kibana_memory_limit }}
+        requests:
+          cpu: {{ kibana_cpu_requests }}
+          memory: {{ kibana_memory_requests }}
+      replicas: {{ kibana_replicas |  int }}
+  curation:
+    type: "curator"
+    curator:
+      resources:
+        limits:
+          memory: "{{ curation_memory_limit }}"
+        requests:
+          cpu: "{{ curation_cpu_requests }}"
+          memory: "{{ curation_memory_requests }}"
+      schedule: "{{ curation_schedule }}"
+  collection:
+    logs:
+      type: "fluentd"
+      fluentd:
+        resources:
+          limits:
+            memory: "{{ collection_memory_limit }}"
+          requests:
+            cpu: "{{ collection_cpu_requests }}"
+            memory: "{{ collection_memory_requests }}"
