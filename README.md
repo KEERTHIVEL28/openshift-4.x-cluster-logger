@@ -1,13 +1,13 @@
 OpenShift Container Platform - Cluster Logging
 =========
 
-This role deploys Cluster Logging on OpenShift 4.3.
+This role deploys Cluster Logging on OpenShift 4.5.
 
 
 Requirements
 ------------
 * Ansible
-* OpenShift 4.3 Deployed
+* OpenShift 4.5 Deployed
 * OpenShift cli
 
 Role Variables
