@@ -9,6 +9,13 @@ spec:
     type: "elasticsearch"
     elasticsearch:
       nodeCount: {{ es_node_count | int }}
+      retentionPolicy: 
+        application:
+          maxAge: 1d
+        infra:
+          maxAge: 7d
+        audit:
+          maxAge: 7d
       resources:
         limits:
           memory: "{{ es_memory_limit }}"
@@ -26,7 +33,7 @@ spec:
         requests:
           cpu: {{ kibana_cpu_requests }}
           memory: {{ kibana_memory_requests }}
-      replicas: {{ kibana_replicas |  int}}
+      replicas: {{ kibana_replicas |  int }}
   curation:
     type: "curator"
     curator:

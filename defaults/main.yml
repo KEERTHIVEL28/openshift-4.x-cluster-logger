@@ -9,7 +9,7 @@ template_owner: root
 
 #Elasticsearch Operator subscription object variables
 provision_elasticsearch_operator: true
-eo_channel: "4.3"
+eo_channel: "4.5"
 eo_installPlanApproval: "Automatic"
 eo_source: "redhat-operators"
 eo_sourceNamespace: "openshift-marketplace"
@@ -17,7 +17,7 @@ eo_name: "elasticsearch-operator"
 
 # Cluster Logging Operator subscription object variables
 provision_cluster_logging_operator: true
-clo_channel: "4.3"
+clo_channel: "4.5"
 clo_name: cluster-logging
 clo_source: redhat-operators
 clo_sourceNamespace: openshift-marketplace
@@ -27,10 +27,10 @@ provision_cluster_logging_instance: true
 enable_es_storage: false
 replication_policy: SingleRedundancy
 management_state: Managed
-es_node_count: "2"
-es_memory_limit: 2Gi
-es_cpu_requests: 200m
-es_memory_requests: 2Gi
+es_node_count: "3"
+es_memory_limit: 16Gi
+es_cpu_requests: 1
+es_memory_requests: 16Gi
 es_storageclassname: "gp2"
 es_storage_size: "200G"
 kibana_replicas: "1"

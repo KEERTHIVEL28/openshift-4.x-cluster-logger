@@ -18,11 +18,11 @@
 
 - name: Creating the cluster logging instance
   command: "oc create -f {{ target_dir }}cluster-logging-template.yaml"
-  when: not delete_deployment and not enable_es_storage
+  when: not  delete_deployment | bool and not enable_es_storage
 
 - name: Creating the cluster logging  with storage
   command: "oc create -f {{ target_dir }}cluster-logging-template-storage.yaml"
-  when: not delete_deployment and  enable_es_storage
+  when: not  delete_deployment | bool and  enable_es_storage
 
 - name: Waiting for  Cluster Logging Operator to Succeeded
   shell: |
@@ -31,14 +31,14 @@
   until: "'Succeeded' in install_status.stdout"
   retries: 60
   delay: 15
-  when: not delete_deployment
+  when: not  delete_deployment | bool
 
 - name: Deleting the cluster logging instance
   command: "oc delete -f {{ target_dir }}cluster-logging-template.yaml"
-  when: delete_deployment and not enable_es_storage
+  when:  delete_deployment | bool and not enable_es_storage
   ignore_errors: yes
 
 - name: Deleting the cluster logging  with storage
   command: "oc delete -f {{ target_dir }}cluster-logging-template-storage.yaml"
-  when: delete_deployment and  enable_es_storage
+  when:  delete_deployment | bool and  enable_es_storage
   ignore_errors: yes
