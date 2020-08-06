@@ -20,13 +20,13 @@ openshift_token  | OpenShift Token used to login to OpenShift | 1234567890
 insecure_skip_tls_verify  | Skip insecure tls verify | true
 template_owner  |  owner of OpenShift tempalte  |  root
 provision_elasticsearch_operator  | Deploy ElasticSearch Operator  |  yes
-eo_channel  | Update Channel for the  Elasticsearch Operator Subscription | "4.5"
+eo_channel  | Update Channel for the  Elasticsearch Operator Subscription | "4.3"
 eo_installPlanApproval  | Install Plan for Elasticsearch Operator | "Automatic"
 eo_source  | Needed if  installed on a restricted network, also known as a disconnected cluster | "redhat-operators"
 eo_sourceNamespace  | Source Namespace of the Operator Installation | "openshift-marketplace"
 eo_name  | Name of the Operator | "elasticsearch-operator"
 provision_cluster_logging_operator  | Deploy Cluster Logging Operator  |  true
-clo_channel  |  Update Channel for the  Cluster Logging  Operator Subscription |  "4.5"
+clo_channel  |  Update Channel for the  Cluster Logging  Operator Subscription |  "4.3"
 clo_source  |  Needed if  installed on a restricted network, also known as a disconnected cluster  |  redhat-operators
 clo_name  |  Name of the Operator |  cluster-logging
 clo_sourceNamespace  | Source Namespace of the Operator Installation |  openshift-marketplace
@@ -60,7 +60,7 @@ A list of other roles hosted on Galaxy should go here, plus any details in regar
 Standard Playbook
 ----------------
 
-````YAML
+```YAML
 - hosts: localhost
   become: yes
   vars:
@@ -76,7 +76,7 @@ Standard Playbook
   - openshift-4.x-cluster-logger
 ```
 
-Minimal Playbook
+Minimal Playbook  for Testing 
 ----------------
 ```YAML
 - hosts: localhost

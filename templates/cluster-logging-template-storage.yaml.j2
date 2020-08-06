@@ -11,10 +11,11 @@ spec:
       nodeCount: {{ es_node_count |  int }}
       resources:
         limits:
-          memory: "{{ es_memory_limit }}"
+          cpu: 1000m
+          memory: {{ es_memory_limit }}
         requests:
-          cpu: "{{ es_cpu_requests }}"
-          memory: "{{ es_memory_requests }}"
+          cpu: 300m
+          memory: {{ es_memory_requests }}
       storage:
         storageClassName: "{{ es_storageclassname }}"
         size: "{{ es_storage_size }}"
