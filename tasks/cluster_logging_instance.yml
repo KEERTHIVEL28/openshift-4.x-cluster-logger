@@ -17,16 +17,16 @@
   when: enable_es_storage
 
 - name: Creating the cluster logging instance
-  command: "oc create -f {{ target_dir }}cluster-logging-template.yaml"
+  command: "/usr/local/bin/oc create -f {{ target_dir }}cluster-logging-template.yaml"
   when: not delete_deployment and not enable_es_storage
 
 - name: Creating the cluster logging  with storage
-  command: "oc create -f {{ target_dir }}cluster-logging-template-storage.yaml"
+  command: "/usr/local/bin/oc create -f {{ target_dir }}cluster-logging-template-storage.yaml"
   when: not delete_deployment and  enable_es_storage
 
 - name: Waiting for  Cluster Logging Operator to Succeeded
   shell: |
-    oc get csv --all-namespaces -n openshift-logging | grep "openshift-logging"
+    /usr/local/bin/oc get csv --all-namespaces -n openshift-logging | grep "openshift-logging"
   register: install_status
   until: "'Succeeded' in install_status.stdout"
   retries: 60
@@ -34,11 +34,11 @@
   when: not delete_deployment
 
 - name: Deleting the cluster logging instance
-  command: "oc delete -f {{ target_dir }}cluster-logging-template.yaml"
+  command: "/usr/local/bin/oc delete -f {{ target_dir }}cluster-logging-template.yaml"
   when: delete_deployment and not enable_es_storage
   ignore_errors: yes
 
 - name: Deleting the cluster logging  with storage
-  command: "oc delete -f {{ target_dir }}cluster-logging-template-storage.yaml"
+  command: "/usr/local/bin/oc delete -f {{ target_dir }}cluster-logging-template-storage.yaml"
   when: delete_deployment and  enable_es_storage
   ignore_errors: yes
