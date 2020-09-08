@@ -60,6 +60,11 @@ A list of other roles hosted on Galaxy should go here, plus any details in regar
 
 Standard Playbook using OpenShift CLI
 ----------------
+Requirements for Ansible k8
+```
+pip3 install kubernetes
+pip3 install openshift
+```
 
 ```YAML
 - hosts: localhost
