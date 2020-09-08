@@ -15,18 +15,19 @@ Role Variables
 
 Type  | Description  | Default Value
 --|---|--
+use_ansible_k8s | use ansible k8s module | true
 openshift_url  | OpenShift Login URL |  https://master.example.com:6443
 openshift_token  | OpenShift Token used to login to OpenShift | 1234567890
 insecure_skip_tls_verify  | Skip insecure tls verify | true
 template_owner  |  owner of OpenShift tempalte  |  root
 provision_elasticsearch_operator  | Deploy ElasticSearch Operator  |  yes
-eo_channel  | Update Channel for the  Elasticsearch Operator Subscription | "4.3"
+eo_channel  | Update Channel for the  Elasticsearch Operator Subscription | "4.5"
 eo_installPlanApproval  | Install Plan for Elasticsearch Operator | "Automatic"
 eo_source  | Needed if  installed on a restricted network, also known as a disconnected cluster | "redhat-operators"
 eo_sourceNamespace  | Source Namespace of the Operator Installation | "openshift-marketplace"
 eo_name  | Name of the Operator | "elasticsearch-operator"
 provision_cluster_logging_operator  | Deploy Cluster Logging Operator  |  true
-clo_channel  |  Update Channel for the  Cluster Logging  Operator Subscription |  "4.3"
+clo_channel  |  Update Channel for the  Cluster Logging  Operator Subscription |  "4.5"
 clo_source  |  Needed if  installed on a restricted network, also known as a disconnected cluster  |  redhat-operators
 clo_name  |  Name of the Operator |  cluster-logging
 clo_sourceNamespace  | Source Namespace of the Operator Installation |  openshift-marketplace
