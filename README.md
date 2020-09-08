@@ -34,7 +34,7 @@ clo_sourceNamespace  | Source Namespace of the Operator Installation |  openshif
 provision_cluster_logging_instance  | Deploy Cluster Logging Instance  |  true
 enable_es_storage  |  Set to true to define Elasticsearch Storage Endpoints |  false
 replication_policy  |  Elasticsearch replication policy |  SingleRedundancy
-management_state  |  [Configure Managed or Unmanaged State](https://docs.openshift.com/container-platform/4.3/logging/config/cluster-logging-management.html)  |  Managed
+management_state  |  [Configure Managed or Unmanaged State](https://docs.openshift.com/container-platform/4.5/logging/config/cluster-logging-management.html)  |  Managed
 es_node_count  | Configure ElasticSearch node count  |  "2"
 es_memory_limit  | Configure ElasticSearch node memory limit  |  2Gi
 es_cpu_requests  | Configure ElasticSearch node cpu requests  |  200m
@@ -157,14 +157,14 @@ Minimal Playbook  for Testing  using OpenShift CLI
 Documentation
 -------
 *Links:*
-* [Understanding cluster logging and OpenShift Container Platform](https://docs.openshift.com/container-platform/4.3/logging/cluster-logging.html)
-* [About deploying cluster logging](https://docs.openshift.com/container-platform/4.3/logging/cluster-logging-deploying-about.html)
-* [Deploying cluster logging](https://docs.openshift.com/container-platform/4.3/logging/cluster-logging-deploying.html)
-* [Changing cluster logging management state](https://docs.openshift.com/container-platform/4.3/logging/config/cluster-logging-management.html)
-* [Configuring cluster logging](https://docs.openshift.com/container-platform/4.3/logging/config/cluster-logging-configuring.html)
-* [Configuring Elasticsearch to store and organize log data](https://docs.openshift.com/container-platform/4.3/logging/config/cluster-logging-elasticsearch.html)
-* [Configuring Kibana](https://docs.openshift.com/container-platform/4.3/logging/config/cluster-logging-kibana.html)
-* [Curation of Elasticsearch Data](https://docs.openshift.com/container-platform/4.3/logging/config/cluster-logging-curator.html)
+* [Understanding cluster logging and OpenShift Container Platform](https://docs.openshift.com/container-platform/4.5/logging/cluster-logging.html)
+* [About deploying cluster logging](https://docs.openshift.com/container-platform/4.5/logging/cluster-logging-deploying-about.html)
+* [Deploying cluster logging](https://docs.openshift.com/container-platform/4.5/logging/cluster-logging-deploying.html)
+* [Changing cluster logging management state](https://docs.openshift.com/container-platform/4.5/logging/config/cluster-logging-management.html)
+* [Configuring cluster logging](https://docs.openshift.com/container-platform/4.5/logging/config/cluster-logging-configuring.html)
+* [Configuring Elasticsearch to store and organize log data](https://docs.openshift.com/container-platform/4.5/logging/config/cluster-logging-elasticsearch.html)
+* [Configuring Kibana](https://docs.openshift.com/container-platform/4.5/logging/config/cluster-logging-kibana.html)
+* [Curation of Elasticsearch Data](https://docs.openshift.com/container-platform/4.5/logging/config/cluster-logging-curator.html)
 
 *Elasticsearch replication policy*  
 You can set the policy that defines how Elasticsearch shards are replicated across data nodes in the cluster:  
