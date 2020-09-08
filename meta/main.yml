@@ -1,7 +1,7 @@
 galaxy_info:
   author: Tosin Akinosho
   description: OpenShift Container Platform - Cluster Logging deployer role
-  company: your company (optional)
+  company: Red Hat
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -34,7 +34,7 @@ galaxy_info:
      - 30
    - name: EL
      versions:
-      - 8 
+      - 8
       - 7
   #   - 25
   # - name: SomePlatform

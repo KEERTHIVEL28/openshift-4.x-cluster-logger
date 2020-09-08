@@ -3,6 +3,10 @@
 openshift_token: 1234567890
 openshift_url:  https://master.example.com:6443
 insecure_skip_tls_verify: true
+
+# Use ansible k8s 
+use_ansible_k8s: true
+
 delete_deployment: false
 target_dir: "/usr/local/src/"
 template_owner: root

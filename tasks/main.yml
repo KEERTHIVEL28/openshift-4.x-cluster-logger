@@ -1,6 +1,7 @@
 ---
 - name: Login to OpenShift Cluster
   include_tasks: openshift_login.yml
+  when: not use_ansible_k8s | bool
 
 - name: Install the Elasticsearch Operator
   include_tasks: elasticsearch_operator.yml

@@ -57,15 +57,15 @@ Dependencies
 
 A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
-Standard Playbook
+
+Standard Playbook using OpenShift CLI
 ----------------
 
 ```YAML
 - hosts: localhost
   become: yes
   vars:
-    openshift_token: 1234567890
-    openshift_url: https://master.example.com:6443
+    use_ansible_k8s: true
     clo_channel: "4.5"
     eo_channel: "4.5"
     delete_deployment: false
@@ -78,7 +78,52 @@ Standard Playbook
   - openshift-4.x-cluster-logger
 ```
 
-Minimal Playbook  for Testing 
+Minimal Playbook  for Testing  using OpenShift CLI
+----------------
+```YAML
+- hosts: localhost
+  become: yes
+  vars:
+    use_ansible_k8s: true
+    clo_channel: "4.5"
+    eo_channel: "4.5"
+    delete_deployment: false
+    insecure_skip_tls_verify: true
+    provision_elasticsearch_operator: true
+    provision_cluster_logging_operator: true
+    provision_cluster_logging_instance: true
+    enable_es_storage: false
+    es_node_count: 2
+    es_memory_limit: 2Gi
+    es_cpu_requests: 200m
+    es_memory_requests: 2Gi
+  roles:
+    - openshift-4.x-cluster-logger
+```
+
+Standard Playbook using OpenShift CLI
+----------------
+
+```YAML
+- hosts: localhost
+  become: yes
+  vars:
+    openshift_token: 1234567890
+    openshift_url: https://master.example.com:6443
+    use_ansible_k8s: false
+    clo_channel: "4.5"
+    eo_channel: "4.5"
+    delete_deployment: false
+    insecure_skip_tls_verify: true
+    provision_elasticsearch_operator: true
+    provision_cluster_logging_operator: true
+    provision_cluster_logging_instance: true
+    enable_es_storage: false
+  roles:
+  - openshift-4.x-cluster-logger
+```
+
+Minimal Playbook  for Testing  using OpenShift CLI
 ----------------
 ```YAML
 - hosts: localhost
@@ -86,6 +131,7 @@ Minimal Playbook  for Testing
   vars:
     openshift_token: 1234567890
     openshift_url: https://master.example.com:6443
+    use_ansible_k8s: false
     clo_channel: "4.5"
     eo_channel: "4.5"
     delete_deployment: false

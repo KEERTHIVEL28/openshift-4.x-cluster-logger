@@ -22,46 +22,89 @@
     group: "{{ template_owner }}"
     mode: 0666
 
-- name: Copying over eo-rbac.yaml
+- name: Copying over eo-rbac-role.yaml
   template:
-    src: templates/eo-rbac.yaml.j2
-    dest:  "{{ target_dir }}eo-rbac.yaml"
+    src: templates/eo-rbac-role.yaml.j2
+    dest:  "{{ target_dir }}eo-rbac-role.yaml"
     owner: "{{ template_owner }}"
     group: "{{ template_owner }}"
     mode: 0666
 
-- name: Creating the openshift-operators-redhat Namespace
+- name: Copying over eo-rbac-rolebinding.yaml
+  template:
+    src: templates/eo-rbac-rolebinding.yaml.j2
+    dest:  "{{ target_dir }}eo-rbac-rolebinding.yaml"
+    owner: "{{ template_owner }}"
+    group: "{{ template_owner }}"
+    mode: 0666
+
+- name: Creating the openshift-operators-redhat Namespace using oc-cli
   command: "oc create -f {{ target_dir }}eo-namespace.yaml"
-  when: not  delete_deployment | bool
+  when: not  delete_deployment | bool and not use_ansible_k8s | bool
 
-- name: Install the Elasticsearch Operator
+- name: Install the Elasticsearch Operator using oc-cli
   command: "oc create -f {{ target_dir }}eo-og.yaml"
-  when: not  delete_deployment | bool
+  when: not  delete_deployment | bool and not use_ansible_k8s | bool
 
-- name: Install the Elasticsearch Operator subscription object
+- name: Install the Elasticsearch Operator subscription object using oc-cli
   command: "oc create -f {{ target_dir }}eo-sub.yaml"
-  when: not  delete_deployment | bool
+  when: not  delete_deployment | bool and not use_ansible_k8s | bool
 
-- name: Create the  Elasticsearch Operator Role-based Access Control (RBAC) object file
-  command: "oc create -f {{ target_dir }}eo-rbac.yaml"
-  when: not  delete_deployment | bool
+- name: Create the  Elasticsearch Operator Role-based Access Control (RBAC) object file using oc-cli
+  command: "oc create -f {{ target_dir }}eo-rbac-role.yaml"
+  when: not  delete_deployment | bool and not use_ansible_k8s | bool
 
-- name: Install the Elasticsearch Operator
+- name: Create the  Elasticsearch Operator Role-based Access Control (RBAC) object file using oc-cli
+  command: "oc create -f {{ target_dir }}eo-rbac-rolebinding.yaml"
+  when: not  delete_deployment | bool and not use_ansible_k8s | bool
+
+- name: Creating the  openshift-operators Elasticsearch k8s
+  k8s:
+    state: present
+    merge_type:
+    - strategic-merge
+    - merge
+    definition: "{{ lookup('file', item ) | from_yaml }}"
+  loop:
+  - "{{ target_dir }}eo-namespace.yaml"
+  - "{{ target_dir }}eo-og.yaml"
+  - "{{ target_dir }}eo-sub.yaml"
+  - "{{ target_dir }}eo-rbac-role.yaml"
+  - "{{ target_dir }}eo-rbac-rolebinding.yaml"
+  when: not  delete_deployment | bool and use_ansible_k8s | bool
+
+- name: Delete the Elasticsearch Operator using oc-cli
   command: "oc delete -f {{ target_dir }}eo-og.yaml"
-  when:  delete_deployment | bool
+  when:  delete_deployment | bool and not use_ansible_k8s | bool
   ignore_errors: yes
 
-- name: Install the Elasticsearch Operator subscription object
+- name: Delete the Elasticsearch Operator subscription object using oc-cli
   command: "oc delete -f {{ target_dir }}eo-sub.yaml"
-  when:  delete_deployment | bool
+  when:  delete_deployment | bool and not use_ansible_k8s | bool
   ignore_errors: yes
 
-- name: Create the  Elasticsearch Operator Role-based Access Control (RBAC) object file
+- name: Delete the  Elasticsearch Operator Role-based Access Control (RBAC) object file using oc-cli
   command: "oc delete -f {{ target_dir }}eo-rbac.yaml"
-  when:  delete_deployment | bool
+  when:  delete_deployment | bool and not use_ansible_k8s | bool
   ignore_errors: yes
 
-- name: Delete the openshift-operators-redhat Namespace
+- name: Delete the openshift-operators-redhat Namespace using oc-cli
   command: "oc delete -f {{ target_dir }}eo-namespace.yaml"
-  when:  delete_deployment | bool
+  when:  delete_deployment | bool and not use_ansible_k8s | bool
+  ignore_errors: yes
+
+- name: Removing the openshift-operators Elasticsearch k8s
+  k8s:
+    state: absent
+    merge_type:
+    - strategic-merge
+    - merge
+    definition: "{{ lookup('file', item ) | from_yaml }}"
+  loop:
+  - "{{ target_dir }}eo-og.yaml"
+  - "{{ target_dir }}eo-sub.yaml"
+  - "{{ target_dir }}eo-rbac-role.yaml"
+  - "{{ target_dir }}eo-rbac-rolebinding.yaml"
+  - "{{ target_dir }}eo-namespace.yaml"
+  when:  delete_deployment | bool and use_ansible_k8s | bool
   ignore_errors: yes
