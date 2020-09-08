@@ -55,18 +55,24 @@ delete_deployment  | delete the deployment and project cluster operator | false
 
 Dependencies
 ------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-
-Standard Playbook using OpenShift CLI
-----------------
 Requirements for Ansible k8
 ```
 pip3 install kubernetes
 pip3 install openshift
 ```
+Requirements for openshift cli 
+```
+install oc command under /usr/bin
+```
 
+Installation
+------------
+```
+$ ansible-galaxy install tosin2013.openshift_4_x_cluster_logger
+```
+
+Standard Playbook using Ansible k8
+----------------
 ```YAML
 - hosts: localhost
   become: yes
@@ -81,10 +87,10 @@ pip3 install openshift
     provision_cluster_logging_instance: true
     enable_es_storage: false
   roles:
-  - openshift-4.x-cluster-logger
+  - tosin2013.openshift_4_x_cluster_logger
 ```
 
-Minimal Playbook  for Testing  using OpenShift CLI
+Minimal Playbook  for Testing  using Ansible k8
 ----------------
 ```YAML
 - hosts: localhost
@@ -104,7 +110,7 @@ Minimal Playbook  for Testing  using OpenShift CLI
     es_cpu_requests: 200m
     es_memory_requests: 2Gi
   roles:
-    - openshift-4.x-cluster-logger
+    - tosin2013.openshift_4_x_cluster_logger
 ```
 
 Standard Playbook using OpenShift CLI
@@ -126,7 +132,7 @@ Standard Playbook using OpenShift CLI
     provision_cluster_logging_instance: true
     enable_es_storage: false
   roles:
-  - openshift-4.x-cluster-logger
+  - tosin2013.openshift_4_x_cluster_logger
 ```
 
 Minimal Playbook  for Testing  using OpenShift CLI
@@ -151,7 +157,7 @@ Minimal Playbook  for Testing  using OpenShift CLI
     es_cpu_requests: 200m
     es_memory_requests: 2Gi
   roles:
-    - openshift-4.x-cluster-logger
+    - tosin2013.openshift_4_x_cluster_logger
 ```
 
 Documentation
@@ -173,7 +179,7 @@ You can set the policy that defines how Elasticsearch shards are replicated acro
 * MultipleRedundancy. The shards for each index are spread over half of the data nodes.
 * SingleRedundancy. A single copy of each shard. Logs are always available and recoverable as long as at least two data nodes exist.
 * ZeroRedundancy. No copies of any shards. Logs may be unavailable (or lost) in the event a node is down or fails.
-* 
+
 License
 -------
 
