@@ -66,6 +66,8 @@ Standard Playbook
   vars:
     openshift_token: 1234567890
     openshift_url: https://master.example.com:6443
+    clo_channel: "4.5"
+    eo_channel: "4.5"
     delete_deployment: false
     insecure_skip_tls_verify: true
     provision_elasticsearch_operator: true
@@ -84,6 +86,8 @@ Minimal Playbook  for Testing
   vars:
     openshift_token: 1234567890
     openshift_url: https://master.example.com:6443
+    clo_channel: "4.5"
+    eo_channel: "4.5"
     delete_deployment: false
     insecure_skip_tls_verify: true
     provision_elasticsearch_operator: true
