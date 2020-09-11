@@ -85,7 +85,8 @@ Standard Playbook using Ansible k8
     provision_elasticsearch_operator: true
     provision_cluster_logging_operator: true
     provision_cluster_logging_instance: true
-    enable_es_storage: false
+    enable_es_storage: true\
+    es_storage_size: "200G"
   roles:
   - tosin2013.openshift_4_x_cluster_logger
 ```
@@ -130,7 +131,8 @@ Standard Playbook using OpenShift CLI
     provision_elasticsearch_operator: true
     provision_cluster_logging_operator: true
     provision_cluster_logging_instance: true
-    enable_es_storage: false
+    enable_es_storage: true
+    es_storage_size: "200G"
   roles:
   - tosin2013.openshift_4_x_cluster_logger
 ```

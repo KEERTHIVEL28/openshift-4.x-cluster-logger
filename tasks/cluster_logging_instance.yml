@@ -44,7 +44,7 @@
     definition: "{{ lookup('file', item ) | from_yaml }}"
   loop:
   - "{{ target_dir }}cluster-logging-template.yaml"
-  when: not  delete_deployment | bool and use_ansible_k8s | bool
+  when: not  delete_deployment | bool and use_ansible_k8s | bool and  not enable_es_storage | bool
 
 - name: Creating the cluster-logging-template-storage k8s
   k8s:
@@ -62,7 +62,7 @@
     minutes: 1
   when: not  delete_deployment | bool and use_ansible_k8s | bool
 
-- name: wait for elasticsearch all pods  to be ready
+- name: wait for  all elasticsearch pods  to be ready
   k8s_info:
     api_version: logging.openshift.io/v1
     kind: ClusterLogging
