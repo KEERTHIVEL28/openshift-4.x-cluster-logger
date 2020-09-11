@@ -48,7 +48,7 @@ kibana_memory_requests  | Configure Kibana  memory requests  |  1Gi
 curation_memory_limit  | Curation memory limit  |  200Mi
 curation_cpu_requests  | Curation cpu requests  |  200m
 curation_memory_requests  |  Curation memory requests |  200Mi
-curation_schedule  |  Curation Schedule  |  `"*/5 * * * *"`
+curation_schedule  |  Curation Schedule  |  `"*/30 * * * *"`
 collection_memory_limit  |  Collection memory limit |  1Gi
 collection_cpu_requests  | Collection CPU requests  |  1G
 delete_deployment  | delete the deployment and project cluster operator | false

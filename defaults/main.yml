@@ -44,7 +44,7 @@ kibana_memory_requests: 2Gi
 curation_memory_limit: 200Mi
 curation_cpu_requests: 200m
 curation_memory_requests: 200Mi
-curation_schedule: "*/5 * * * *"
+curation_schedule: "*/30 * * * *"
 collection_memory_limit:  2Gi
 collection_cpu_requests: 300m
 collection_memory_requests: 2Gi
