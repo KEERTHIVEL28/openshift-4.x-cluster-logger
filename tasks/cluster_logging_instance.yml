@@ -57,6 +57,10 @@
   - "{{ target_dir }}cluster-logging-template-storage.yaml"
   when: not  delete_deployment | bool and use_ansible_k8s | bool  and  enable_es_storage | bool
 
+- name: pausing for 1 minute to allow elasticsearch status to update
+  pause:
+    minutes: 1
+
 - name: wait for elasticsearch all pods  to be ready
   k8s_info:
     api_version: logging.openshift.io/v1

@@ -6,7 +6,7 @@ This role deploys Cluster Logging on OpenShift 4.5.
 
 Requirements
 ------------
-* Ansible
+* Ansible 2.9
 * OpenShift 4.5 Deployed
 * OpenShift cli
 
